@@ -3,7 +3,7 @@
 function substrCount(input, needle, offset = 0, length = input.length) {
     let substr = input.slice(offset).slice(0, length);
     let counter = 0;
-    let regexp = /ll/g;
+    let regexp =  new RegExp(`${needle}`, 'g');
     let arr;
 
     while((arr = regexp.exec(substr)) !== null) {
