@@ -1,5 +1,20 @@
 'use strict'
 
+function isDateCorrect(str) {
+    let regEx = /^(\d{1,2})\-(\d{1,2})\-(\d{1,4})$/;
+    if(!regEx.test(str)) {
+        return false;
+    }
+
+    let match = str.match(regEx);
+    if(match) {
+       if((match[1] > 1 && match[1] <= 31) && (match[2] > 1 && match[2] <= 12) && match[3] > 0) {
+            return true;
+       }
+    }
+    return false;
+}
+
 function parseDate(str) {
     let match = str.match(/^(\d{1,2})\-(\d{1,2})\-(\d{4})$/)
     let date, obj = {};
@@ -13,6 +28,6 @@ function parseDate(str) {
 }
 //TEST
 console.log('------------------RegExp Date------------------');
-console.log(parseDate('08-08-2020')); // 08-08-2020
-console.log(parseDate('7-13-2020')); // 07-01-2021
+console.log(isDateCorrect('08-08-2020')); // true
+console.log(isDateCorrect('34-12-2020')); // false
 console.log('\n');

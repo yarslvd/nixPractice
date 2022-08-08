@@ -1,15 +1,13 @@
 'use strict'
 
 function strEdit(str) {
-    let arr = str.split('\n');
+    let regEx = /[!^(, )|!^\n]+/g;
+    let arr = str.split(regEx);
     let res = '';
-    for(let i = 0; i < arr.length; i++) {
-        arr[i] = arr[i].split(', ').reverse();
+    for(let i = 0; i < arr.length; i += 2) {
         if(i !== arr.length - 1) {
-            res += arr[i].join(' ') + '\n';
-        }
-        else {
-            res += arr[i].join(' ');
+            res += arr[i + 1];
+            res += ' ' + arr[i] + '\n';
         }
     }
     return res;
