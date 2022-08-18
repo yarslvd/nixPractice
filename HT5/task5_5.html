@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Таблица умножения</title>
+<style type="text/css">
+td{padding:10px;border:1px solid #369;}
+</style>
+<script type="text/javascript">
+var cell = 10;
+var row = 10;
+
+function createDOM() {
+    const maindiv = document.querySelector('#d');
+    if(maindiv.classList.value === 'table') {
+        return;
+    }
+
+    maindiv.classList.add('table');
+	let table = document.createElement('table');
+
+    for(let i = 0; i < row; i++) {
+        let row = document.createElement("tr");
+        table.appendChild(row);
+        for(let j = 0; j < cell; j++) {
+            let cell = document.createElement("td");
+            cell.innerHTML = String((i + 1) * (j + 1));
+            row.appendChild(cell);
+        }
+    }
+
+    maindiv.appendChild(table);
+}
+</script>
+</head>
+<body>
+<a href="javascript:createDOM();">Создать таблицу с помощью методов DOM</a><br>
+<div id="d"></div>
+</body>
+</html>
