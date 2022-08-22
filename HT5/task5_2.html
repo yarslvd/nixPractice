@@ -12,6 +12,7 @@
 
 		function checkForm() {
 			const inputs = document.querySelectorAll('input');
+			const form = document.querySelector('form');
 			let isEmpty = false;
 
 			for(let input of inputs) {
@@ -27,17 +28,10 @@
 			if(isEmpty) {
 				alert('The input is empty!!!');
 			}
+			else {
+				form.submit();
+			}
 		}
-		/*
-			Создайте и опишите функцию checkForm(), которая должна вызываться перед отправкой формы
-			В функции необходимо проверить, все ли поля заполнены
-			Если все поля заполнены, то отправить форму
-			Если хотя бы одно поле не заполнено:
-				- выдать alert() с предупреждением
-				- изменить цвет рамки пустого поля на красный
-				- данные не отправлять!
-		*/
-		
 	</script>	
 </head>
 

@@ -60,48 +60,45 @@
 	<script type="text/javascript">
 
 		function setPlusIcon() {
-			let ul = document.querySelector("ul");
-			let items = ul.getElementsByTagName("li");
-
-			for(let el of items) {
-				switch(el.children[1]) {
-					case el.children[1]:
-						el.children[1].parentElement.style.listStyleImage = 'url(img/plus.gif)';
-						el.children[1].parentElement.classList.add('open');
-						el.children[1].parentElement.addEventListener('click', aClick);
-						break;
-					default:
-						el.children[0].parentElement.style.listStyleImage = 'url(img/point.gif)'
+			let a = document.querySelectorAll('a');
+			for (let el of a) {
+				let next = el.nextElementSibling;
+				if (next && next.tagName === 'UL') {
+					el.parentElement.style.listStyleImage = 'url(img/plus.gif)';
+					next.style.display = "none";
 				}
+				if(!next) {
+					el.parentElement.style.listStyleImage = 'url(img/point.gif)';
+				}
+
+				el.addEventListener('click', aClick);
 			}
 		}
-		/*
-			Опишите функцию setPlusIcon(), которая
-			- устанавливает для элементов li значок [+],
-				если этот элемент имеет вложенный список
-			- регистрирует функцию aClick в качестве обработчика события onclick
-				для всех ссылок
-		*/
-		/*
-			Запустите функцию setPlusIcon() при загрузке страницы
-		*/
-		setPlusIcon();
-		/*
-			Опишите функцию aClick(), которая обрабатывает щелчок по ссылке
-			1. Получите объект - ссылку, по которой был сделан щелчок
-			2. Найдите родительский li
-			3. Найдите вложенный список
-			4. Если вложенных списков нет - разрешите переход по ссылке
-			5. Назначьте вложенному списку нужные свойства и поменяйте иконку
-			6. Запретите переход по ссылке
-		*/
+
 		function aClick(e){
 			e.preventDefault();
-			console.log(e.path[1].classList.contains('open'));
 
-			e.path[1].classList.toggle('open');
+			let a = e.target;
+			let li = a.parentElement;
+			let ul = li.querySelector('ul');
 
+			if (!ul) {
+				a.click();
+				return;
+			}
+			switch(ul.style.display) {
+				case "block":
+					ul.style.display = "none";
+					li.style.listStyleImage = "url(img/plus.gif)";
+					break;
+				default:
+					ul.style.display = "block";
+					li.style.listStyleImage = "url(img/minus.gif)"
+					break;
+			}
 		}
+
+		setPlusIcon();
 
 	</script>
 
